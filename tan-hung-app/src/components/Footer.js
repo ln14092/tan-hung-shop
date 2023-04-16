@@ -114,17 +114,17 @@ const Footer = () => {
         </SocialContainer>
       </Left>
       <Center>
-        <Title>Useful Links</Title>
+        <Title>Các liên kết</Title>
         <List>
-          <ListItem>Home</ListItem>
-          <ListItem>Cart</ListItem>
-          <ListItem>Man Fashion</ListItem>
-          <ListItem>Woman Fashion</ListItem>
-          <ListItem>Accessories</ListItem>
-          <ListItem>My Account</ListItem>
-          <ListItem>Order Tracking</ListItem>
-          <ListItem>Wishlist</ListItem>
-          <ListItem>Wishlist</ListItem>
+          <ListItem>Trang chủ</ListItem>
+          <ListItem>Giỏ hàng</ListItem>
+          <ListItem>Thời trang Nam</ListItem>
+          <ListItem>Thời trang Nữ</ListItem>
+          <ListItem>Phụ kiện</ListItem>
+          <ListItem>Tài khoản của tôi</ListItem>
+          <ListItem>Đơn hàng</ListItem>
+          <ListItem>Theo dõi đơn hàng</ListItem>
+          <ListItem>Danh sách yêu thích</ListItem>
           <ListItem>Terms</ListItem>
         </List>
       </Center>
