@@ -5,6 +5,7 @@ export const sliderItems = [
   //   title: "SUMMER SALE",
   //   desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
   //   bg: "f5fafd",
+  //   cat:"women"
   // },
   {
     id: 2,
@@ -12,6 +13,7 @@ export const sliderItems = [
     title: "COLLECTION",
     desc: "Sự đơn giản là định nghĩa của thanh lịch.",
     bg: "fcf1ed",
+    cat:"coat"
   },
   {
     id: 3,
@@ -19,6 +21,7 @@ export const sliderItems = [
     title: "COLLECTION",
     desc: "Sang trọng không phải là nổi bật nhưng phải được ghi nhớ",
     bg: "fbf0f4",
+    cat: "jean"
   },
 ];
 
