@@ -4,6 +4,8 @@ import Products from "../components/Products";
 import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 import { mobile } from "../responsive";
+import { useNavigate, useLocation } from "react-router";
+import { useState } from "react";
 
 const Container = styled.div``;
 
@@ -36,6 +38,19 @@ const Select = styled.select`
 const Option = styled.option``;
 
 const ProductList = () => {
+  const location = useLocation();
+  const cat = location.pathname.split("/")[2];
+  const [filters, setFilters] = useState({});
+  const [sort, setSort] = useState("newest");
+
+  const handleFilters = (e) => {
+    const value = e.target.value;
+    setFilters({
+      ...filters,
+      [e.target.name]: value,
+    });
+  };
+
   return (
     <Container>
       <Navbar />
@@ -43,7 +58,7 @@ const ProductList = () => {
       <FilterContainter>
         <Filter>
           <FilterText>Lọc sản phẩm: </FilterText>
-          <Select>
+          <Select name="color" onChange={handleFilters}>
             <Option disabled selected>
               Màu sắc
             </Option>
@@ -54,7 +69,7 @@ const ProductList = () => {
             <Option>Vàng</Option>
             <Option>Lục</Option>
           </Select>
-          <Select>
+          <Select name="size" onChange={handleFilters}>
             <Option disabled selected>
               Kích thước
             </Option>
@@ -67,14 +82,16 @@ const ProductList = () => {
         </Filter>
         <Filter>
           <FilterText>Sắp xếp sản phẩm: </FilterText>
-          <Select>
-            <Option selected>Sản phẩm mới nhất</Option>
-            <Option>Giá tăng dần</Option>
-            <Option>Giá giảm dần</Option>
+          <Select onChange={(e) => setSort(e.target.value)}>
+            <Option selected value="newest">
+              Sản phẩm mới nhất
+            </Option>
+            <Option value="asc">Giá tăng dần</Option>
+            <Option value="desc">Giá giảm dần</Option>
           </Select>
         </Filter>
       </FilterContainter>
-      <Products />
+      <Products cat={cat} filters={filters} sort={sort} />
       <Newsletter />
       <Footer />
     </Container>
