@@ -2,13 +2,14 @@ import { Badge } from "@material-ui/core";
 import { Search, ShoppingCartOutlined } from "@material-ui/icons";
 import React from "react";
 import styled from "styled-components";
-import {mobile} from "../responsive";
+import { mobile } from "../responsive";
 import logo from "../images/logo.png";
-// import { mobile } from "../responsive";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   height: 60px;
-  ${mobile({ height:"50px"})}
+  ${mobile({ height: "50px" })}
 `;
 
 const Wrapper = styled.div`
@@ -16,7 +17,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  ${mobile({ padding:"10px 0px"})}
+  ${mobile({ padding: "10px 0px" })}
   height: 100%;
 `;
 
@@ -29,7 +30,7 @@ const Left = styled.div`
 const Language = styled.span`
   font-size: 14px;
   cursor: pointer;
-  ${mobile({ display:"none"})}
+  ${mobile({ display: "none" })}
 `;
 
 const SearchContainer = styled.div`
@@ -42,7 +43,7 @@ const SearchContainer = styled.div`
 
 const Input = styled.input`
   border: none;
-  ${mobile({ width:"50px"})}
+  ${mobile({ width: "50px" })}
 `;
 
 const Center = styled.div`
@@ -58,21 +59,21 @@ const Logo = styled.div`
   background-repeat: no-repeat;
   background-size: contain;
   font-weight: bold;
-  ${mobile({ fontSize:"24px"})}
+  ${mobile({ fontSize: "24px" })}
 `;
 const Right = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  ${mobile({flex:2 , justifyContent:"center"})}
+  ${mobile({ flex: 2, justifyContent: "center" })}
 `;
 
 const MenuItem = styled.div`
   font-size: 14px;
   cursor: pointer;
   margin-left: 25px;
-  ${mobile({ fontSize:"12px",marginLeft:"10px"})}
+  ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
 
 const Navbar = () => {
@@ -90,13 +91,19 @@ const Navbar = () => {
           <Logo></Logo>
         </Center>
         <Right>
-          <MenuItem>ĐĂNG KÍ</MenuItem>
-          <MenuItem>ĐĂNG NHẬP</MenuItem>
-          <MenuItem>
-            <Badge overlap="rectangular" badgeContent={4} color="primary">
-              <ShoppingCartOutlined />
-            </Badge>
-          </MenuItem>
+          <Link to="/register">
+            <MenuItem>ĐĂNG KÍ</MenuItem>
+          </Link>
+          <Link to="/login">
+            <MenuItem>ĐĂNG NHẬP</MenuItem>
+          </Link>
+          <Link to="/cart">
+            <MenuItem>
+              <Badge overlap="rectangular" badgeContent={4} color="primary">
+                <ShoppingCartOutlined />
+              </Badge>
+            </MenuItem>
+          </Link>
         </Right>
       </Wrapper>
     </Container>
