@@ -4,6 +4,19 @@ import { useEffect, useState } from "react";
 import { userRequest } from "../../requestMethods";
 
 export default function WidgetSm() {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const getUsers = async () => {
+      try {
+        const res = await userRequest.get("users/?new=true");
+        setUsers(res.data);
+      } catch {
+        console.log("Đã có lỗi xảy ra ...");
+      }
+    };
+    getUsers();
+  }, []);
 
   return (
     <div className="widgetSm">

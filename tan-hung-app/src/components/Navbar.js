@@ -77,6 +77,8 @@ const MenuItem = styled.div`
 `;
 
 const Navbar = () => {
+  const quantity = useSelector((state) => state.cart.quantity);
+
   return (
     <Container>
       <Wrapper>
@@ -99,7 +101,11 @@ const Navbar = () => {
           </Link>
           <Link to="/cart">
             <MenuItem>
-              <Badge overlap="rectangular" badgeContent={4} color="primary">
+              <Badge
+                overlap="rectangular"
+                badgeContent={quantity}
+                color="primary"
+              >
                 <ShoppingCartOutlined />
               </Badge>
             </MenuItem>

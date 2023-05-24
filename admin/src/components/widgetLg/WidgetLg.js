@@ -4,20 +4,20 @@ import "./widgetLg.css";
 import { format } from "timeago.js";
 
 export default function WidgetLg() {
-  const [Orders, setUsers] = useState([]);
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     const getOrders = async () => {
       try {
         const res = await userRequest.get("orders");
-        setOrders(res.data)
+        setOrders(res.data);
       } catch {
-
+        console.log("Đã có lỗi xảy ra ...");
       }
-
-    }
+    };
     getOrders();
-  },[]); 
+  }, []);
+
   const Button = ({ type }) => {
     return <button className={"widgetLgButton " + type}>{type}</button>;
   };

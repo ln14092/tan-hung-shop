@@ -125,7 +125,9 @@ const Product = () => {
       try {
         const res = await publicRequest.get("/products/find/" + id);
         setProduct(res.data);
-      } catch {}
+      } catch {
+        console.log("Đã có lỗi xảy ra khi lấy dữ liệu sản phẩm ...");
+      }
     };
     getProduct();
   }, [id]);
@@ -150,13 +152,9 @@ const Product = () => {
           <Image src={product.img} />
         </ImgContainer>
         <InfoContainer>
-          <Title>Denim justify</Title>
-          <Desc>
-            Quần jean là loại quần bền, phổ biến trong thời trang hiện đại và có
-            nhiều kiểu dáng khác nhau. Chúng có tính linh hoạt cao và phù hợp
-            với nhiều hoàn cảnh khác nhau.
-          </Desc>
-          <Price>$ 20</Price>
+          <Title>{product.title}</Title>
+          <Desc>{product.desc}</Desc>
+          <Price>$ {product.price}</Price>
           <FilterContainer>
             <Filter>
               {product.color?.map((c) => (

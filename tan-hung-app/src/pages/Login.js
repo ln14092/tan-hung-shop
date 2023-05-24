@@ -47,6 +47,10 @@ const Button = styled.button`
   color: white;
   cursor: pointer;
   margin-bottom: 10px;
+  &:disabled {
+    color: green;
+    cursor: not-allowed;
+  }
 `;
 
 const Link = styled.a`
@@ -88,7 +92,7 @@ const Login = () => {
           <Button onClick={handleClick} disabled={isFetching}>
             ĐĂNG NHẬP
           </Button>
-          {error && <Error>Something went wrong...</Error>}
+          {error && <Error>Đã có lỗi xảy ra...</Error>}
           <Link>QUÊN MẬT KHẨU?</Link>
           <Link>TẠO TÀI KHOẢN MỚI</Link>
         </Form>
