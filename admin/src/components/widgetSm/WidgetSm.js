@@ -9,7 +9,7 @@ export default function WidgetSm() {
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const res = await userRequest.get("users/?new=true");
+        const res = await userRequest.get("user/?new=true");
         setUsers(res.data);
       } catch {
         console.log("Đã có lỗi xảy ra ...");

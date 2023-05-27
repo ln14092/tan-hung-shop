@@ -90,7 +90,9 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo></Logo>
+          <Link to="/">
+            <Logo></Logo>
+          </Link>
         </Center>
         <Right>
           <Link to="/register">

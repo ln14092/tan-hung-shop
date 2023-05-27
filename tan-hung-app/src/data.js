@@ -13,7 +13,7 @@ export const sliderItems = [
     title: "COLLECTION",
     desc: "Sự đơn giản là định nghĩa của thanh lịch.",
     bg: "fcf1ed",
-    cat:"coat"
+    cat: "coat",
   },
   {
     id: 3,
@@ -21,7 +21,7 @@ export const sliderItems = [
     title: "COLLECTION",
     desc: "Sang trọng không phải là nổi bật nhưng phải được ghi nhớ",
     bg: "fbf0f4",
-    cat: "jean"
+    cat: "jean",
   },
 ];
 
@@ -30,16 +30,19 @@ export const categories = [
     id: 1,
     img: "https://images.pexels.com/photos/581087/pexels-photo-581087.jpeg?auto=compress&cs=tinysrgb&w=1600",
     title: "ÁO",
+    cat: "men's clothing",
   },
   {
     id: 2,
     img: "https://images.pexels.com/photos/1598507/pexels-photo-1598507.jpeg?auto=compress&cs=tinysrgb&w=1600",
     title: "QUẦN",
+    cat: "men's clothing",
   },
   {
     id: 3,
     img: "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=1600",
     title: "GIÀY",
+    cat: "men's clothing",
   },
 ];
 

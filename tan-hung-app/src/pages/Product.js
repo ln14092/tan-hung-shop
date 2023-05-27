@@ -124,6 +124,7 @@ const Product = () => {
     const getProduct = async () => {
       try {
         const res = await publicRequest.get("/products/find/" + id);
+        console.log(res);
         setProduct(res.data);
       } catch {
         console.log("Đã có lỗi xảy ra khi lấy dữ liệu sản phẩm ...");
@@ -157,15 +158,19 @@ const Product = () => {
           <Price>$ {product.price}</Price>
           <FilterContainer>
             <Filter>
-              {product.color?.map((c) => (
-                <FilterColor color={c} key={c} onClick={() => setColor(c)} />
+              {product.color?.map((c, index) => (
+                <FilterColor
+                  color={c}
+                  key={(c, index)}
+                  onClick={() => setColor(c)}
+                />
               ))}
             </Filter>
             <Filter>
               <FilterTitle>Kích thước</FilterTitle>
               <FilterSize onChange={(e) => setSize(e.target.value)}>
-                {product.size?.map((s) => (
-                  <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                {product.size?.map((s, index) => (
+                  <FilterSizeOption key={index}>{s}</FilterSizeOption>
                 ))}
               </FilterSize>
             </Filter>

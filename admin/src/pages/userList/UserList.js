@@ -3,14 +3,40 @@ import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { userRows } from "../../dummyData";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { userRequest } from "../../requestMethods";
 
 export default function UserList() {
-  const [data, setData] = useState(userRows);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const getAllUsers = async () => {
+      try {
+        const res = await userRequest.get("/user");
+        const data = res.data.map((obj, index) => ({
+          id: index + 1,
+          username: obj.username,
+          avatar:
+            obj.img ??
+            "https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+          email: obj.email,
+          status: "active",
+          transaction: 0,
+        }));
+        setData(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getAllUsers();
+  }, []);
 
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
   };
+
+  const handleUpdate = (id) => {};
 
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
@@ -46,7 +72,12 @@ export default function UserList() {
         return (
           <>
             <Link to={"/user/" + params.row.id}>
-              <button className="userListEdit">Edit</button>
+              <button
+                onClick={handleUpdate(params.row.id)}
+                className="userListEdit"
+              >
+                Edit
+              </button>
             </Link>
             <DeleteOutline
               className="userListDelete"

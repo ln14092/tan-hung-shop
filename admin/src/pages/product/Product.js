@@ -54,6 +54,8 @@ export default function Product() {
     getStats();
   }, [productId, MONTHS]);
 
+  const handleUpdate = () => {};
+
   return (
     <div className="product">
       <div className="productTitleContainer">
@@ -105,12 +107,14 @@ export default function Product() {
           <div className="productFormRight">
             <div className="productUpload">
               <img src={product.img} alt="" className="productUploadImg" />
-              <label for="file">
+              <label htmlFor="file">
                 <Publish />
               </label>
               <input type="file" id="file" style={{ display: "none" }} />
             </div>
-            <button className="productButton">Update</button>
+            <button onClick={handleUpdate} className="productButton">
+              Update
+            </button>
           </div>
         </form>
       </div>

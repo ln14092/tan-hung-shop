@@ -1,6 +1,6 @@
 import { Add, Remove } from "@material-ui/icons";
 import styled from "styled-components";
-// import Announcement from "../components/Announcement";
+import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
@@ -12,8 +12,6 @@ import { useSelector } from "react-redux";
 import logo from "../images/logo.png";
 
 const Container = styled.div``;
-
-const KEY = "";
 
 const Wrapper = styled.div`
   padding: 20px;
@@ -174,9 +172,9 @@ const Cart = () => {
       try {
         const res = await userRequest.post("/checkout/payment", {
           tokenId: stripeToken.id,
-          amount: cart.total * 100,
+          amount: 500,
         });
-        history.push("/success", {
+        history("/success", {
           stripeData: res.data,
           products: cart,
         });
@@ -188,7 +186,7 @@ const Cart = () => {
   return (
     <Container>
       <Navbar />
-      {/* <Announcement /> */}
+      <Announcement />
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
