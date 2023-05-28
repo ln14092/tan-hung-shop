@@ -7,9 +7,11 @@ import { mobile } from "../responsive";
 import StripeCheckout from "react-stripe-checkout";
 import { useEffect, useState } from "react";
 import { userRequest } from "../requestMethods";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import logo from "../images/logo.png";
+import { clearCart, removeProduct } from "../redux/cartRedux";
+import axios from "axios";
 
 const Container = styled.div``;
 
@@ -109,7 +111,7 @@ const ProductAmountContainer = styled.div`
 `;
 
 const ProductAmount = styled.div`
-  font-size: 24px;
+  font-size: 18px;
   margin: 5px;
   ${mobile({ margin: "5px 15px" })}
 `;
@@ -118,6 +120,13 @@ const ProductPrice = styled.div`
   font-size: 30px;
   font-weight: 200;
   ${mobile({ marginBottom: "20px" })}
+`;
+
+const ProductQuantity = styled.span`
+  font-size: 18px;
+  font-weight: 200;
+  display: flex;
+  align-items: center;
 `;
 
 const Hr = styled.hr`
@@ -160,28 +169,56 @@ const Button = styled.button`
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.user);
   const [stripeToken, setStripeToken] = useState(null);
+  console.log(cart);
+
   const history = useNavigate();
 
   const onToken = (token) => {
     setStripeToken(token);
   };
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const makeRequest = async () => {
       try {
-        const res = await userRequest.post("/checkout/payment", {
-          tokenId: stripeToken.id,
-          amount: 500,
-        });
+        // let products = cart.products.map((product) => ({
+        //   productId: product._id,
+        //   quantity: product.quantity,
+        // }));
+        let total = cart.total;
+        const res = await axios.post(
+          "http://localhost:5000/api/checkout/payment",
+          {
+            // products,
+            // userId: user.currentUser._id,
+            // address: "Ha Noi",
+            tokenId: stripeToken.id,
+            amount: 300,
+          },
+          {
+            headers: {
+              Authorization: `Bearer sk_test_51N6m5wIA8uAoJj038VzImUDQNzyXQcmIdqf8SbTkBnfBvwWy65CWJI4zA6UKrEUKZbaUovde0DB8Y8vrNV4oWMic002T5a72Tq`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        dispatch(clearCart());
+        const data = { stripeData: res.data, cart: cart };
         history("/success", {
-          stripeData: res.data,
-          products: cart,
+          state: data,
         });
-      } catch {}
+      } catch {
+        alert("Thanh toán không thành công");
+      }
     };
     stripeToken && makeRequest();
-  }, [stripeToken, cart.total, history]);
+  }, [stripeToken, history, dispatch]);
+
+  const handleRemoveProduct = (product) => {
+    dispatch(removeProduct(product));
+  };
 
   return (
     <Container>
@@ -190,18 +227,29 @@ const Cart = () => {
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton>CONTINUE SHOPPING</TopButton>
+          <TopButton>
+            <Link
+              to="/"
+              style={{
+                textDecoration: "none",
+                color: "black",
+                padding: "12px",
+              }}
+            >
+              CONTINUE SHOPPING
+            </Link>
+          </TopButton>
           <TopTexts>
-            <TopText>Shopping Bag(2)</TopText>
+            <TopText>Shopping Bag({cart.quantity})</TopText>
             <TopText>Your Wishlist (0)</TopText>
           </TopTexts>
-          <TopButton type="filled">CHECKOUT NOW</TopButton>
+          {/* <TopButton type="filled">CHECKOUT NOW</TopButton> */}
         </Top>
         <Bottom>
           <Info>
             {cart.products.length > 0 ? (
-              cart.products.map((product) => (
-                <Product>
+              cart.products.map((product, index) => (
+                <Product key={index}>
                   <ProductDetail>
                     <Image src={product.img} />
                     <Details>
@@ -219,9 +267,24 @@ const Cart = () => {
                   </ProductDetail>
                   <PriceDetail>
                     <ProductAmountContainer>
-                      <Add />
-                      <ProductAmount>2</ProductAmount>
-                      <Remove />
+                      {/* <Remove onClick={() => handleIncrea(product.quantity)} /> */}
+
+                      {/* <Add onClick={() => handleDecrea(product.quantity)} /> */}
+                      <ProductQuantity>
+                        <b style={{ display: "inline-block" }}>Quantity:</b>{" "}
+                        <ProductAmount>{product.quantity}</ProductAmount>
+                      </ProductQuantity>
+                      <div
+                        style={{
+                          border: "1px solid #ccc",
+                          padding: "4px",
+                          borderRadius: "4px",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => handleRemoveProduct(product)}
+                      >
+                        Xóa
+                      </div>
                     </ProductAmountContainer>
                     <ProductPrice>
                       $ {product.price * product.quantity}
@@ -230,7 +293,14 @@ const Cart = () => {
                 </Product>
               ))
             ) : (
-              <h1>Chưa có sản phẩm nào được thêm vào giỏ hàng ...</h1>
+              <h1
+                style={{
+                  fontSize: "18px",
+                  padding: "20px",
+                }}
+              >
+                Chưa có sản phẩm nào được thêm vào giỏ hàng ...
+              </h1>
             )}
             <Hr />
           </Info>
@@ -238,7 +308,7 @@ const Cart = () => {
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
+              <SummaryItemPrice>$ {cart.total ?? 0}</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
@@ -250,7 +320,7 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
+              <SummaryItemPrice>$ {cart.total ?? 0}</SummaryItemPrice>
             </SummaryItem>
             <StripeCheckout
               name="Tân Hưng Shop"
@@ -260,6 +330,7 @@ const Cart = () => {
               description={`Your total is $${cart.total}`}
               amount={cart.total * 100}
               token={onToken}
+              allowRememberMe
               stripeKey="pk_test_51N6m5wIA8uAoJj03gvrG8m1Ik17LwxAaJr2IKPXYZG9YRUbQK5mChvY7tFAO5wJluiAaBiRcPjqr6LmDdoKWuKhd003BsRyEVK"
             >
               <Button>CHECKOUT NOW</Button>

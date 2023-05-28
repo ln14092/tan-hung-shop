@@ -9,11 +9,11 @@ import {
 } from "@material-ui/icons";
 import styled from "styled-components";
 import logo from "../images/logo.png";
-import {mobile} from "../responsive";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   display: flex;
-  ${mobile({ flexDirection:"column"})}
+  ${mobile({ flexDirection: "column" })}
 `;
 
 const Left = styled.div`
@@ -56,7 +56,7 @@ const SocialIcon = styled.div`
 const Center = styled.div`
   flex: 1;
   padding: 20px;
-  ${mobile({ display:"none"})}
+  ${mobile({ display: "none" })}
 `;
 
 const Title = styled.h3`
@@ -79,7 +79,7 @@ const ListItem = styled.li`
 const Right = styled.div`
   flex: 1;
   padding: 20px;
-  ${mobile({ backgroundColor:"#fff8f8"})}
+  ${mobile({ backgroundColor: "#fff8f8" })}
 `;
 
 const ContactItem = styled.div`
@@ -118,31 +118,31 @@ const Footer = () => {
         </SocialContainer>
       </Left>
       <Center>
-        <Title>Các liên kết</Title>
+        <Title>Useful Links</Title>
         <List>
-          <ListItem>Trang chủ</ListItem>
-          <ListItem>Giỏ hàng</ListItem>
-          <ListItem>Thời trang Nam</ListItem>
-          <ListItem>Thời trang Nữ</ListItem>
-          <ListItem>Phụ kiện</ListItem>
-          <ListItem>Tài khoản của tôi</ListItem>
-          <ListItem>Đơn hàng</ListItem>
-          <ListItem>Theo dõi đơn hàng</ListItem>
-          <ListItem>Danh sách yêu thích</ListItem>
+          <ListItem>Home</ListItem>
+          <ListItem>Cart</ListItem>
+          <ListItem>Man Fashion</ListItem>
+          <ListItem>Woman Fashion</ListItem>
+          <ListItem>Accessories</ListItem>
+          <ListItem>My Account</ListItem>
+          <ListItem>Order Tracking</ListItem>
+          <ListItem>Wishlist</ListItem>
+          <ListItem>Wishlist</ListItem>
           <ListItem>Terms</ListItem>
         </List>
       </Center>
       <Right>
         <Title>Contact</Title>
         <ContactItem>
-          <Room style={{ marginRight: "10px" }} /> Hà Nội: 296 Trương Định,
-          Tương Mai, Hoàng Mai, Hà Nội
+          <Room style={{ marginRight: "10px" }} /> 622 Dixie Path , South
+          Tobinchester 98336
         </ContactItem>
         <ContactItem>
           <Phone style={{ marginRight: "10px" }} /> +1 234 56 78
         </ContactItem>
         <ContactItem>
-          <MailOutline style={{ marginRight: "10px" }} /> contact@tanhung.shop
+          <MailOutline style={{ marginRight: "10px" }} /> contact@lama.dev
         </ContactItem>
         <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
       </Right>

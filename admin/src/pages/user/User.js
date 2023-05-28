@@ -27,7 +27,7 @@ export default function User() {
               className="userShowImg"
             />
             <div className="userShowTopTitle">
-              <span className="userShowUsername">Anna Becker</span>
+              <span className="userShowUsername">ADMIN</span>
               <span className="userShowUserTitle">Software Engineer</span>
             </div>
           </div>
@@ -35,11 +35,11 @@ export default function User() {
             <span className="userShowTitle">Account Details</span>
             <div className="userShowInfo">
               <PermIdentity className="userShowIcon" />
-              <span className="userShowInfoTitle">annabeck99</span>
+              <span className="userShowInfoTitle">admin</span>
             </div>
             <div className="userShowInfo">
               <CalendarToday className="userShowIcon" />
-              <span className="userShowInfoTitle">10.12.1999</span>
+              <span className="userShowInfoTitle">10.12.2000</span>
             </div>
             <span className="userShowTitle">Contact Details</span>
             <div className="userShowInfo">
@@ -48,11 +48,11 @@ export default function User() {
             </div>
             <div className="userShowInfo">
               <MailOutline className="userShowIcon" />
-              <span className="userShowInfoTitle">annabeck99@gmail.com</span>
+              <span className="userShowInfoTitle">admin@gmail.com</span>
             </div>
             <div className="userShowInfo">
               <LocationSearching className="userShowIcon" />
-              <span className="userShowInfoTitle">New York | USA</span>
+              <span className="userShowInfoTitle">HN</span>
             </div>
           </div>
         </div>
@@ -62,29 +62,17 @@ export default function User() {
             <div className="userUpdateLeft">
               <div className="userUpdateItem">
                 <label>Username</label>
-                <input
-                  type="text"
-                  placeholder="annabeck99"
-                  className="userUpdateInput"
-                />
+                <input type="text" placeholder="" className="userUpdateInput" />
               </div>
               <div className="userUpdateItem">
                 <label>Full Name</label>
-                <input
-                  type="text"
-                  placeholder="Anna Becker"
-                  className="userUpdateInput"
-                />
+                <input type="text" placeholder="" className="userUpdateInput" />
               </div>
               <div className="userUpdateItem">
                 <label>Email</label>
-                <input
-                  type="text"
-                  placeholder="annabeck99@gmail.com"
-                  className="userUpdateInput"
-                />
+                <input type="text" placeholder="" className="userUpdateInput" />
               </div>
-              <div className="userUpdateItem">
+              <div className="">
                 <label>Phone</label>
                 <input
                   type="text"
@@ -94,11 +82,7 @@ export default function User() {
               </div>
               <div className="userUpdateItem">
                 <label>Address</label>
-                <input
-                  type="text"
-                  placeholder="New York | USA"
-                  className="userUpdateInput"
-                />
+                <input type="text" placeholder="" className="userUpdateInput" />
               </div>
             </div>
             <div className="userUpdateRight">

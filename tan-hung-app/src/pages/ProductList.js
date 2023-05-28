@@ -63,22 +63,17 @@ const ProductList = () => {
             <Option disabled selected>
               Màu sắc
             </Option>
-            <Option>Trắng</Option>
-            <Option>Đen</Option>
-            <Option>Đỏ</Option>
-            <Option>Xanh</Option>
-            <Option>Vàng</Option>
-            <Option>Lục</Option>
+            <Option>Black</Option>
+            <Option>Blue</Option>
+            <Option>Yellow</Option>
           </Select>
           <Select name="size" onChange={handleFilters}>
             <Option disabled selected>
               Kích thước
             </Option>
+            <Option>S</Option>
             <Option>M</Option>
             <Option>L</Option>
-            <Option>S</Option>
-            <Option>XS</Option>
-            <Option>XL</Option>
           </Select>
         </Filter>
         <Filter>

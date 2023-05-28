@@ -116,15 +116,14 @@ const Product = () => {
   const id = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
-  const [color, setColor] = useState("");
-  const [size, setSize] = useState("");
+  const [color, setColor] = useState("Black");
+  const [size, setSize] = useState("S");
   const dispatch = useDispatch();
 
   useEffect(() => {
     const getProduct = async () => {
       try {
         const res = await publicRequest.get("/products/find/" + id);
-        console.log(res);
         setProduct(res.data);
       } catch {
         console.log("Đã có lỗi xảy ra khi lấy dữ liệu sản phẩm ...");
@@ -178,7 +177,7 @@ const Product = () => {
           <AddContainer>
             <AmountContainer>
               <Remove onClick={() => handleQuantity("dec")} />
-              <Amount>1</Amount>
+              <Amount>{quantity}</Amount>
               <Add onClick={() => handleQuantity("inc")} />
             </AmountContainer>
             <Button onClick={handleClick}>Thêm vào giỏ hàng</Button>

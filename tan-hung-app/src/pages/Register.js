@@ -1,5 +1,9 @@
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { register } from "../redux/apiCalls";
 
 const Container = styled.div`
   width: 100vw;
@@ -50,22 +54,44 @@ const Button = styled.button`
 `;
 
 const Register = () => {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const data = { username, email, password };
+    register(dispatch, data, navigate);
+  };
+
   return (
     <Container>
       <Wrapper>
         <Title>TẠO TÀI KHOẢN</Title>
         <Form>
-          <Input placeholder="Tên" />
-          <Input placeholder="Họ" />
-          <Input placeholder="Email" />
-          <Input placeholder="Tên đăng nhập" />
-          <Input placeholder="Mật khẩu" />
-          <Input placeholder="Xác nhận mật khẩu" />
+          {/* <Input placeholder="" /> */}
+          {/* <Input placeholder="Họ" /> */}
+          <Input
+            placeholder="Tên người dùng"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <Input
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            placeholder="Mật khẩu"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          {/* <Input placeholder="Xác nhận mật khẩu" /> */}
           <Agreement>
             Để tạo tài khoản mới bạn vui lòng đồng ý với các chính sách dữ liệu
             các nhân của chúng tôi <b>Chính sách bảo mật</b>
           </Agreement>
-          <Button>TẠO</Button>
+          <Button onClick={handleRegister}>TẠO</Button>
         </Form>
       </Wrapper>
     </Container>

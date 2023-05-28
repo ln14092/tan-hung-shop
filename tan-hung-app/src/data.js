@@ -1,25 +1,25 @@
 export const sliderItems = [
-  // {
-  //   id: 1,
-  //   img: "https://i.ibb.co/XsdmR2c/1.png",
-  //   title: "SUMMER SALE",
-  //   desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
-  //   bg: "f5fafd",
-  //   cat:"women"
-  // },
+  {
+    id: 1,
+    img: "https://images.pexels.com/photos/4061662/pexels-photo-4061662.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    title: "SUMMER SALE",
+    desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
+    bg: "f5fafd",
+    cat: "women",
+  },
   {
     id: 2,
     img: "https://images.pexels.com/photos/4061662/pexels-photo-4061662.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    title: "COLLECTION",
-    desc: "Sự đơn giản là định nghĩa của thanh lịch.",
+    title: "AUTUMN COLLECTION",
+    desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
     bg: "fcf1ed",
     cat: "coat",
   },
   {
     id: 3,
     img: "https://images.pexels.com/photos/322207/pexels-photo-322207.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    title: "COLLECTION",
-    desc: "Sang trọng không phải là nổi bật nhưng phải được ghi nhớ",
+    title: "LOUNGEWEAR LOVE",
+    desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
     bg: "fbf0f4",
     cat: "jean",
   },
@@ -29,20 +29,20 @@ export const categories = [
   {
     id: 1,
     img: "https://images.pexels.com/photos/581087/pexels-photo-581087.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    title: "ÁO",
-    cat: "men's clothing",
+    title: "MEN",
+    cat: "men",
   },
   {
     id: 2,
     img: "https://images.pexels.com/photos/1598507/pexels-photo-1598507.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    title: "QUẦN",
-    cat: "men's clothing",
+    title: "WOMEN",
+    cat: "women",
   },
   {
     id: 3,
     img: "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    title: "GIÀY",
-    cat: "men's clothing",
+    title: "JEWELERY",
+    cat: "jewelery",
   },
 ];
 

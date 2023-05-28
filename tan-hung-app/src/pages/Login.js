@@ -3,6 +3,7 @@ import { mobile } from "../responsive";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../redux/apiCalls";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   width: 100vw;
@@ -53,7 +54,7 @@ const Button = styled.button`
   }
 `;
 
-const Link = styled.a`
+const Linkk = styled.a`
   margin: 5px 0px;
   font-size: 12px;
   text-decoration: underline;
@@ -89,12 +90,26 @@ const Login = () => {
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button onClick={handleClick} disabled={isFetching}>
-            ĐĂNG NHẬP
-          </Button>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <Button onClick={handleClick} disabled={isFetching}>
+              ĐĂNG NHẬP
+            </Button>
+            <Button>
+              <Link
+                to="/register"
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  padding: "20px",
+                }}
+              >
+                ĐĂNG KÍ
+              </Link>
+            </Button>
+          </div>
           {error && <Error>Đã có lỗi xảy ra...</Error>}
-          <Link>QUÊN MẬT KHẨU?</Link>
-          <Link>TẠO TÀI KHOẢN MỚI</Link>
+          <Linkk>QUÊN MẬT KHẨU?</Linkk>
+          <Linkk>TẠO TÀI KHOẢN MỚI</Linkk>
         </Form>
       </Wrapper>
     </Container>

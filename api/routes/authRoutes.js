@@ -15,7 +15,15 @@ router.post("/register", async (req, res) => {
 
   try {
     const savedUser = await newUser.save();
-    res.status(201).json(savedUser);
+    const accessToken = jwt.sign(
+      {
+        id: newUser._id,
+        isAdmin: newUser.isAdmin,
+      },
+      "secretJWT",
+      { expiresIn: "3d" }
+    );
+    res.status(201).json({ ...savedUser._doc, accessToken });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -53,6 +61,14 @@ router.post("/login", async (req, res) => {
     res.status(200).json({ ...others, accessToken });
   } catch (err) {
     res.status(500).json(err);
+  }
+});
+
+router.post("/logout", (req, res) => {
+  try {
+    res.status(200).json("Logout successful");
+  } catch (error) {
+    res.status(200).json(error);
   }
 });
 
