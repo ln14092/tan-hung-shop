@@ -15,11 +15,12 @@ import {
   addProductSuccess,
 } from "./productRedux";
 
-export const login = async (dispatch, user) => {
+export const login = async (dispatch, user, navigate) => {
   dispatch(loginStart());
   try {
     const res = await publicRequest.post("/auth/login", user);
     dispatch(loginSuccess(res.data));
+    navigate("/");
   } catch (err) {
     dispatch(loginFailure());
   }
@@ -38,17 +39,18 @@ export const getProducts = async (dispatch) => {
 export const deleteProduct = async (id, dispatch) => {
   dispatch(deleteProductStart());
   try {
-    // const res = await userRequest.delete(`/products/${id}`);
+    await userRequest.delete(`/products/${id}`);
     dispatch(deleteProductSuccess(id));
   } catch (err) {
     dispatch(deleteProductFailure());
   }
 };
 
-export const updateProduct = async (id, product, dispatch) => {
+export const updateProduct = async (product, dispatch) => {
   dispatch(updateProductStart());
   try {
-    dispatch(updateProductSuccess({ id, product }));
+    const res = await userRequest.put(`/products/${product._id}`, product);
+    dispatch(updateProductSuccess({ product }));
   } catch (err) {
     dispatch(updateProductFailure());
   }
@@ -57,7 +59,7 @@ export const updateProduct = async (id, product, dispatch) => {
 export const addProduct = async (product, dispatch) => {
   dispatch(addProductStart());
   try {
-    const res = await userRequest.post(`/products`,product );
+    const res = await userRequest.post(`/products`, product);
     dispatch(addProductSuccess(res.data));
   } catch (err) {
     dispatch(addProductFailure());

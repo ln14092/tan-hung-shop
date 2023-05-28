@@ -13,17 +13,28 @@ import {
   WorkOutline,
   Report,
 } from "@material-ui/icons";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Sidebar() {
+  const [activeItem, setActiveItem] = useState("home");
+
+  const handleClick = (item) => {
+    setActiveItem(item);
+  };
+
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
-            <Link to="/" className="link">
-              <li className="sidebarListItem active">
+            <Link to="/" className="link" onClick={() => handleClick("home")}>
+              <li
+                className={`sidebarListItem ${
+                  activeItem === "home" ? "active" : ""
+                }`}
+              >
                 <LineStyle className="sidebarIcon" />
                 Home
               </li>
@@ -41,20 +52,44 @@ export default function Sidebar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Quick Menu</h3>
           <ul className="sidebarList">
-            <Link to="/users" className="link">
-              <li className="sidebarListItem">
+            <Link
+              to="/users"
+              className="link"
+              onClick={() => handleClick("users")}
+            >
+              <li
+                className={`sidebarListItem ${
+                  activeItem === "users" ? "active" : ""
+                }`}
+              >
                 <PermIdentity className="sidebarIcon" />
                 Users
               </li>
             </Link>
-            <Link to="/products" className="link">
-              <li className="sidebarListItem">
+            <Link
+              to="/products"
+              className="link"
+              onClick={() => handleClick("products")}
+            >
+              <li
+                className={`sidebarListItem ${
+                  activeItem === "products" ? "active" : ""
+                }`}
+              >
                 <Storefront className="sidebarIcon" />
                 Products
               </li>
             </Link>
-            <Link to="/transaction" className="link">
-              <li className="sidebarListItem">
+            <Link
+              to="/transaction"
+              className="link"
+              onClick={() => handleClick("transaction")}
+            >
+              <li
+                className={`sidebarListItem ${
+                  activeItem === "transaction" ? "active" : ""
+                }`}
+              >
                 <AttachMoney className="sidebarIcon" />
                 Transactions
               </li>

@@ -6,7 +6,6 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-import app from "../../firebase";
 import { addProduct } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
 
@@ -71,6 +70,7 @@ export default function NewProduct() {
             color: colors,
           };
           addProduct(product, dispatch);
+          alert("Create Success!");
         });
       }
     );
@@ -131,13 +131,6 @@ export default function NewProduct() {
             onChange={handleColors}
           />
         </div>
-        {/* <div className="addProductItem">
-          <label>Stock</label>
-          <select name="inStock" onChange={handleChange}>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
-        </div> */}
         <button onClick={handleClick} className="addProductButton">
           Create
         </button>

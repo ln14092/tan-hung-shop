@@ -1,11 +1,17 @@
 import { Link, useLocation } from "react-router-dom";
 import "./product.css";
 import Chart from "../../components/chart/Chart";
-import { productData } from "../../dummyData";
 import { Publish } from "@material-ui/icons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
 import { userRequest } from "../../requestMethods";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
+import { updateProduct } from "../../redux/apiCalls";
 
 export default function Product() {
   const location = useLocation();
@@ -15,6 +21,73 @@ export default function Product() {
   const product = useSelector((state) =>
     state.product.products.find((product) => product._id === productId)
   );
+
+  const [title, setTitle] = useState(product.title);
+  const [desc, setDesc] = useState(product.desc);
+  const [price, setPrice] = useState(product.price);
+  const [colors, setColors] = useState(product.color);
+  const [sizes, setSizes] = useState(product.size);
+  const [cat, setCat] = useState(product.categories);
+  const [file, setFile] = useState(product.img);
+
+  const dispatch = useDispatch();
+
+  const handleCat = (e) => {
+    setCat(e.target.value.split(","));
+  };
+
+  const handleSizes = (e) => {
+    setSizes(e.target.value.split(","));
+  };
+
+  const handleColors = (e) => {
+    setColors(e.target.value.split(","));
+  };
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    const fileName = new Date().getTime() + file.name;
+    const storage = getStorage();
+    const storageRef = ref(storage, fileName);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log("Upload is " + progress + "% done");
+        switch (snapshot.state) {
+          case "paused":
+            console.log("Upload is paused");
+            break;
+          case "running":
+            console.log("Upload is running");
+            break;
+          default:
+        }
+      },
+      (error) => {
+        // Handle unsuccessful uploads
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          const data = {
+            ...product,
+            img: downloadURL,
+            categories: cat,
+            size: sizes,
+            color: colors,
+            title,
+            desc,
+            price,
+          };
+          updateProduct(data, dispatch);
+          alert("Update Success!");
+        });
+      }
+    );
+  };
 
   const MONTHS = useMemo(
     () => [
@@ -54,8 +127,6 @@ export default function Product() {
     getStats();
   }, [productId, MONTHS]);
 
-  const handleUpdate = () => {};
-
   return (
     <div className="product">
       <div className="productTitleContainer">
@@ -82,10 +153,6 @@ export default function Product() {
               <span className="productInfoKey">Sales:</span>
               <span className="productInfoValue">5123</span>
             </div>
-            <div className="productInfoItem">
-              <span className="productInfoKey">In stock:</span>
-              <span className="productInfoValue">{product.inStock}</span>
-            </div>
           </div>
         </div>
       </div>
@@ -93,16 +160,35 @@ export default function Product() {
         <form className="productForm">
           <div className="productFormLeft">
             <label>Product Name</label>
-            <input type="text" placeholder={product.title} />
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
             <label>Product Description</label>
-            <input type="text" placeholder={product.desc} />
+            <input
+              type="text"
+              value={desc}
+              onChange={(e) => setDesc(e.target.value)}
+            />
             <label>Price</label>
-            <input type="text" placeholder={product.price} />
-            <label>In Stock</label>
-            <select name="inStock" id="idStock">
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-            </select>
+            <input
+              type="text"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+            <div className="addProductItem">
+              <label>Categories</label>
+              <input type="text" value={cat} onChange={handleCat} />
+            </div>
+            <div className="addProductItem">
+              <label>Sizes</label>
+              <input type="text" value={sizes} onChange={handleSizes} />
+            </div>
+            <div className="addProductItem">
+              <label>Colors</label>
+              <input type="text" value={colors} onChange={handleColors} />
+            </div>
           </div>
           <div className="productFormRight">
             <div className="productUpload">
@@ -110,9 +196,14 @@ export default function Product() {
               <label htmlFor="file">
                 <Publish />
               </label>
-              <input type="file" id="file" style={{ display: "none" }} />
+              <input
+                type="file"
+                id="file"
+                style={{ display: "none" }}
+                onChange={(e) => setFile(e.target.files[0])}
+              />
             </div>
-            <button onClick={handleUpdate} className="productButton">
+            <button onClick={handleClick} className="productButton">
               Update
             </button>
           </div>

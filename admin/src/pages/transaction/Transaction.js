@@ -1,6 +1,6 @@
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
-import { userRows } from "../../dummyData";
+import { transitionData } from "../../dummyData";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -10,9 +10,9 @@ export default function Transaction() {
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
     {
-      field: "user",
-      headerName: "User",
-      width: 200,
+      field: "name",
+      headerName: "Name",
+      width: 180,
       renderCell: (params) => {
         return (
           <div className="userListUser">
@@ -22,15 +22,20 @@ export default function Transaction() {
         );
       },
     },
-    { field: "email", headerName: "Email", width: 200 },
+    { field: "email", headerName: "Email", width: 180 },
     {
-      field: "status",
-      headerName: "Orders",
-      width: 120,
+      field: "products",
+      headerName: "Products",
+      width: 220,
     },
     {
-      field: "transaction",
-      headerName: "Transaction Volume",
+      field: "amount",
+      headerName: "Amount",
+      width: 180,
+    },
+    {
+      field: "address",
+      headerName: "Address",
       width: 160,
     },
     {
@@ -56,7 +61,7 @@ export default function Transaction() {
   return (
     <div className="userList">
       <DataGrid
-        rows={userRows}
+        rows={transitionData}
         disableSelectionOnClick
         columns={columns}
         pageSize={8}

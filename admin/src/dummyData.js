@@ -239,3 +239,17 @@ export const productRows = [
     price: "$120.00",
   },
 ];
+
+export const transitionData = [
+  {
+    id: 1,
+    username: "Linh Nguyen",
+    avatar:
+      "https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+    email: "linh@gmail.com",
+    products: ["Apple Airpods", "Macbook"],
+    amount: 1,
+    address: "Ha Noi",
+    status: "pending",
+  },
+];

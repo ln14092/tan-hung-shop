@@ -7,7 +7,7 @@ export default function Topbar() {
     <div className="topbar">
       <div className="topbarWrapper">
         <div className="topLeft">
-          <span className="logo">Tân Hưng Shop</span>
+          <span className="logo">Tan Hung Shop</span>
         </div>
         <div className="topRight">
           <div className="topbarIconContainer">
