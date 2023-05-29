@@ -23,7 +23,7 @@ const Success = () => {
               productId: item._id,
               quantity: item._quantity,
             })),
-            amount: 500,
+            amount: cart.total,
             address: "Ha Noi",
           },
           {
@@ -33,7 +33,6 @@ const Success = () => {
             },
           }
         );
-        console.log(res);
         setOrderId(res.data._id);
       } catch {}
     };

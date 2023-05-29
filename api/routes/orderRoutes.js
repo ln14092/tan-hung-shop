@@ -60,7 +60,12 @@ router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
 
 router.get("/", verifyTokenAndAdmin, async (req, res) => {
   try {
-    const orders = await Order.find();
+    const orders = await Order.find()
+      .populate({
+        path: "products.productId",
+        model: "Product",
+      })
+      .populate("userId");
     res.status(200).json(orders);
   } catch (err) {
     res.status(500).json(err);

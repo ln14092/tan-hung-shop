@@ -5,10 +5,44 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { userRequest } from "../../requestMethods";
+import { useSelector } from "react-redux";
 
 export default function Transaction() {
+  const [transactions, setTransactions] = useState([]);
+  const { user } = useSelector((state) => state);
+  const token = user.currentUser.accessToken;
+  useEffect(() => {
+    const getTransactions = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/orders", {
+          headers: {
+            token: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+
+        const data = res.data.map((item, index) => ({
+          id: index + 1,
+          username: item.userId.username,
+          avatar:
+            item.userId.img ??
+            "https://static.thenounproject.com/png/5034901-200.png",
+          email: item.userId.email,
+          products: item.products.map((i) => `${i.productId.title}`),
+          amount: item.products.map((i) => `${i.quantity}`),
+          address: item.address,
+          status: item.status,
+        }));
+        setTransactions(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    token && getTransactions();
+  }, [token]);
+
   const columns = [
-    { field: "id", headerName: "ID", width: 90 },
+    { field: "id", headerName: "ID", width: 50 },
     {
       field: "name",
       headerName: "Name",
@@ -26,12 +60,17 @@ export default function Transaction() {
     {
       field: "products",
       headerName: "Products",
-      width: 220,
+      width: 200,
     },
     {
       field: "amount",
       headerName: "Amount",
-      width: 180,
+      width: 120,
+    },
+    {
+      field: "status",
+      headerName: "Status",
+      width: 120,
     },
     {
       field: "address",
@@ -61,7 +100,7 @@ export default function Transaction() {
   return (
     <div className="userList">
       <DataGrid
-        rows={transitionData}
+        rows={transactions}
         disableSelectionOnClick
         columns={columns}
         pageSize={8}

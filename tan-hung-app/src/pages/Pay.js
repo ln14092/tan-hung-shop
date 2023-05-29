@@ -18,7 +18,6 @@ const Pay = () => {
             amount: 2000,
           }
         );
-        console.log(res.data);
         navigate("/success");
       } catch (error) {
         console.log(error);

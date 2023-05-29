@@ -171,7 +171,6 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);
   const [stripeToken, setStripeToken] = useState(null);
-  console.log(cart);
 
   const history = useNavigate();
 
@@ -283,7 +282,7 @@ const Cart = () => {
                         }}
                         onClick={() => handleRemoveProduct(product)}
                       >
-                        Xóa
+                        Remove
                       </div>
                     </ProductAmountContainer>
                     <ProductPrice>

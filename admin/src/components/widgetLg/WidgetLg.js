@@ -1,22 +1,31 @@
 import { useEffect, useState } from "react";
 import { userRequest } from "../../requestMethods";
+import { useSelector } from "react-redux";
+import axios from "axios";
 import "./widgetLg.css";
 import { format } from "timeago.js";
 
 export default function WidgetLg() {
   const [orders, setOrders] = useState([]);
+  const { user } = useSelector((state) => state);
+  const token = user.currentUser.accessToken;
 
   useEffect(() => {
     const getOrders = async () => {
       try {
-        const res = await userRequest.get("/orders");
+        const res = await axios.get("http://localhost:5000/api/orders", {
+          headers: {
+            token: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
         setOrders(res.data);
       } catch {
         console.log("Đã có lỗi xảy ra ...");
       }
     };
     getOrders();
-  }, []);
+  }, [token]);
 
   const Button = ({ type }) => {
     return <button className={"widgetLgButton " + type}>{type}</button>;
@@ -36,7 +45,7 @@ export default function WidgetLg() {
           {orders.map((order) => (
             <tr className="widgetLgTr" key={order._id}>
               <td className="widgetLgUser">
-                <span className="widgetLgName">{order.userId}</span>
+                <span className="widgetLgName">{order.userId.username}</span>
               </td>
               <td className="widgetLgDate">{format(order.createdAt)}</td>
               <td className="widgetLgAmount">${order.amount}</td>

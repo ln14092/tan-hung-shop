@@ -6,20 +6,21 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { userRequest } from "../../requestMethods";
+import { useSelector } from "react-redux";
 
 export default function UserList() {
   const [data, setData] = useState([]);
+  const { user } = useSelector((state) => state);
 
   useEffect(() => {
     const getAllUsers = async () => {
       try {
         const res = await userRequest.get("/user");
         const data = res.data.map((obj, index) => ({
-          id: index + 1,
+          id: obj._id,
           username: obj.username,
           avatar:
-            obj.img ??
-            "https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+            obj.img ?? "https://static.thenounproject.com/png/5034901-200.png",
           email: obj.email,
           status: "active",
           transaction: 0,
@@ -32,8 +33,18 @@ export default function UserList() {
     getAllUsers();
   }, []);
 
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/user/${id}`, {
+        headers: {
+          token: `Bearer ${user.currentUser.accessToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+      setData(data.filter((item) => item.id !== id));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleUpdate = (id) => {};

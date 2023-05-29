@@ -16,7 +16,7 @@ import React, { Fragment } from "react";
 import { publicRoutes, privateRoutes } from "./routes";
 
 function App() {
-  const admin = useSelector((state) => state.user.currentUser?.isAdmin);
+  const admin = useSelector((state) => state.user.currentUser.isAdmin);
   const routes = admin ? privateRoutes : publicRoutes;
 
   return (
