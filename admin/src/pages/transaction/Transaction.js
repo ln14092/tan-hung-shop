@@ -11,6 +11,7 @@ export default function Transaction() {
   const [transactions, setTransactions] = useState([]);
   const { user } = useSelector((state) => state);
   const token = user.currentUser.accessToken;
+
   useEffect(() => {
     const getTransactions = async () => {
       try {
@@ -22,7 +23,7 @@ export default function Transaction() {
         });
 
         const data = res.data.map((item, index) => ({
-          id: index + 1,
+          id: item._id,
           username: item.userId.username,
           avatar:
             item.userId.img ??
@@ -41,12 +42,27 @@ export default function Transaction() {
     token && getTransactions();
   }, [token]);
 
+  const handleDeleteOrder = async (id) => {
+    try {
+      await axios.delete("http://localhost:5000/api/orders/" + id, {
+        headers: {
+          token: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      alert("Delete Successfully");
+    } catch (error) {
+      alert("Delete Failure");
+    }
+  };
+
   const columns = [
-    { field: "id", headerName: "ID", width: 50 },
+    { field: "id", headerName: "ID", width: 90 },
     {
       field: "name",
       headerName: "Name",
-      width: 180,
+      width: 170,
       renderCell: (params) => {
         return (
           <div className="userListUser">
@@ -56,11 +72,11 @@ export default function Transaction() {
         );
       },
     },
-    { field: "email", headerName: "Email", width: 180 },
+    { field: "email", headerName: "Email", width: 170 },
     {
       field: "products",
       headerName: "Products",
-      width: 200,
+      width: 180,
     },
     {
       field: "amount",
@@ -89,7 +105,7 @@ export default function Transaction() {
             </Link>
             <DeleteOutline
               className="userListDelete"
-              //   onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDeleteOrder(params.row.id)}
             />
           </>
         );

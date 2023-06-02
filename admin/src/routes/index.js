@@ -19,5 +19,5 @@ const privateRoutes = [
   { path: "/transaction", component: Transaction },
 ];
 
-const publicRoutes = [{ path: "login", component: Login, layout: null }];
+const publicRoutes = [{ path: "/", component: Login, layout: null }];
 export { publicRoutes, privateRoutes };
