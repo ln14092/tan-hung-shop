@@ -1,5 +1,5 @@
 import { Badge } from "@material-ui/core";
-import { Search, ShoppingCartOutlined } from "@material-ui/icons";
+import { ShoppingCartOutlined } from "@material-ui/icons";
 import React from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
@@ -7,6 +7,7 @@ import logo from "../images/logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../redux/apiCalls";
+import Search from "./Search";
 
 const Container = styled.div`
   height: 60px;
@@ -92,11 +93,8 @@ const Navbar = () => {
     <Container>
       <Wrapper>
         <Left>
-          <Language>VIE</Language>
-          <SearchContainer>
-            <Input placeholder="Tìm kiếm..." />
-            <Search style={{ color: "gray", fontSize: 16 }} />
-          </SearchContainer>
+          <Language>ENG</Language>
+          <Search />
         </Left>
         <Center>
           <Link to="/">

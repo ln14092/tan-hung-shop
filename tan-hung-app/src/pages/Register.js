@@ -69,12 +69,10 @@ const Register = () => {
   return (
     <Container>
       <Wrapper>
-        <Title>TẠO TÀI KHOẢN</Title>
+        <Title>CREATE AN ACCOUNT</Title>
         <Form>
-          {/* <Input placeholder="" /> */}
-          {/* <Input placeholder="Họ" /> */}
           <Input
-            placeholder="Tên người dùng"
+            placeholder="Username"
             onChange={(e) => setUsername(e.target.value)}
           />
           <Input
@@ -82,16 +80,15 @@ const Register = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
           <Input
-            placeholder="Mật khẩu"
+            placeholder="Password"
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          {/* <Input placeholder="Xác nhận mật khẩu" /> */}
           <Agreement>
-            Để tạo tài khoản mới bạn vui lòng đồng ý với các chính sách dữ liệu
-            các nhân của chúng tôi <b>Chính sách bảo mật</b>
+            By creating an account, I consent to the processing of my personal
+            data in accordance with the <b>PRIVACY POLICY</b>
           </Agreement>
-          <Button onClick={handleRegister}>TẠO</Button>
+          <Button onClick={handleRegister}>CREATE</Button>
         </Form>
       </Wrapper>
     </Container>

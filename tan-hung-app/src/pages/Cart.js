@@ -298,7 +298,7 @@ const Cart = () => {
                   padding: "20px",
                 }}
               >
-                Chưa có sản phẩm nào được thêm vào giỏ hàng ...
+                No products have been added to cart yet...
               </h1>
             )}
             <Hr />

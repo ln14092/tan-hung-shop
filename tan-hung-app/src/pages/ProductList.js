@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import { mobile } from "../responsive";
 import { useNavigate, useLocation } from "react-router";
 import { useState } from "react";
+import Announcement from "../components/Announcement";
 
 const Container = styled.div``;
 
@@ -40,7 +41,6 @@ const Option = styled.option``;
 const ProductList = () => {
   const location = useLocation();
   const cat = location.pathname.split("/")[3];
-  console.log(cat);
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState("newest");
 
@@ -55,13 +55,14 @@ const ProductList = () => {
   return (
     <Container>
       <Navbar />
+      <Announcement />
       <Title>{cat}</Title>
       <FilterContainter>
         <Filter>
-          <FilterText>Lọc sản phẩm: </FilterText>
+          <FilterText>Filter Products: </FilterText>
           <Select name="color" onChange={handleFilters}>
             <Option disabled selected>
-              Màu sắc
+              Color
             </Option>
             <Option>Black</Option>
             <Option>Blue</Option>
@@ -69,7 +70,7 @@ const ProductList = () => {
           </Select>
           <Select name="size" onChange={handleFilters}>
             <Option disabled selected>
-              Kích thước
+              Size
             </Option>
             <Option>S</Option>
             <Option>M</Option>
@@ -77,13 +78,13 @@ const ProductList = () => {
           </Select>
         </Filter>
         <Filter>
-          <FilterText>Sắp xếp sản phẩm: </FilterText>
+          <FilterText>Sort Products: </FilterText>
           <Select onChange={(e) => setSort(e.target.value)}>
             <Option selected value="newest">
-              Sản phẩm mới nhất
+              Newest
             </Option>
-            <Option value="asc">Giá tăng dần</Option>
-            <Option value="desc">Giá giảm dần</Option>
+            <Option value="asc">Price (asc)</Option>
+            <Option value="desc">Price (desc)</Option>
           </Select>
         </Filter>
       </FilterContainter>

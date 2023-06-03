@@ -80,20 +80,20 @@ const Login = () => {
   return (
     <Container>
       <Wrapper>
-        <Title>ĐĂNG NHẬP TÀI KHOẢN</Title>
+        <Title>SIGN IN</Title>
         <Form>
           <Input
-            placeholder="Tên người dùng"
+            placeholder="Email"
             onChange={(e) => setUsername(e.target.value)}
           />
           <Input
-            placeholder="Mật khẩu"
+            placeholder="Password"
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Button onClick={handleClick} disabled={isFetching}>
-              ĐĂNG NHẬP
+              LOGIN
             </Button>
             <Button>
               <Link
@@ -104,13 +104,13 @@ const Login = () => {
                   padding: "20px",
                 }}
               >
-                ĐĂNG KÍ
+                REGISTER
               </Link>
             </Button>
           </div>
           {error && <Error>Đã có lỗi xảy ra...</Error>}
-          <Linkk>QUÊN MẬT KHẨU?</Linkk>
-          <Linkk>TẠO TÀI KHOẢN MỚI</Linkk>
+          <Linkk>DO NOT YOU REMEMBER THE PASSWORD?</Linkk>
+          <Linkk>CREATE A NEW ACCOUNT</Linkk>
         </Form>
       </Wrapper>
     </Container>

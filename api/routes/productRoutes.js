@@ -81,4 +81,17 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/search", async (req, res) => {
+  try {
+    const products = await Product.find({
+      title: { $regex: req.query.title },
+    }).limit(3);
+    // .select("title price img");
+
+    res.json({ products });
+  } catch (error) {
+    res.status(400).json({ error: error });
+  }
+});
+
 module.exports = router;

@@ -3,3 +3,36 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.search-result {
+  padding: 8px 0;
+  position: absolute;
+  z-index: 9;
+  top: 100%;
+  right: 0;
+  width: 190px;
+  /* min-height: 200px; */
+  list-style: none;
+  background-color: aliceblue;
+}
+
+.result-item {
+  padding: 8px;
+  text-decoration: none;
+  display: block;
+}
+
+.result-title {
+  font-size: 16px;
+  color: #333;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.result-item:hover {
+  background-color: rgb(206, 214, 221);
+  cursor: pointer;
+}
