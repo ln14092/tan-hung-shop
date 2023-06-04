@@ -1,10 +1,8 @@
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
-import { transitionData } from "../../dummyData";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { userRequest } from "../../requestMethods";
 import { useSelector } from "react-redux";
 
 export default function Transaction() {
@@ -50,6 +48,7 @@ export default function Transaction() {
           "Content-Type": "application/json",
         },
       });
+      setTransactions(transactions.filter((item) => item.id !== id));
 
       alert("Delete Successfully");
     } catch (error) {
